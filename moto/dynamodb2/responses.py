@@ -241,6 +241,8 @@ class DynamoHandler(BaseResponse):
         # {u'KeyConditionExpression': u'#n0 = :v0', u'ExpressionAttributeValues': {u':v0': {u'S': u'johndoe'}}, u'ExpressionAttributeNames': {u'#n0': u'username'}}
         key_condition_expression = self.body.get('KeyConditionExpression')
         filter_kwargs = {}
+        if self.body.get("QueryFilter"):
+            filter_kwargs.update(self.body.get("QueryFilter"))
         if key_condition_expression:
             value_alias_map = self.body['ExpressionAttributeValues']
 
